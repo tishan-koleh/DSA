@@ -1,5 +1,7 @@
 package Trees;
 
+import java.util.List;
+
 public class BinaryTreeTraversal {
     public static void main(String[] args) {
         TreeNode root = new TreeNode(1);
@@ -13,35 +15,38 @@ public class BinaryTreeTraversal {
         root.right.right.left = new TreeNode(9);
         root.right.right.right = new TreeNode(10);
 
-        preOrderTraversal(root);
+        //preOrderTraversal(root);
         System.out.println();
-        postOrderTraversal(root);
+        //postOrderTraversal(root);
         System.out.println();
-        inOrderTraversal(root);
+        //inOrderTraversal(root);
     }
 
-    private static void preOrderTraversal(TreeNode treeNode){
+    public static void preOrderTraversal(TreeNode treeNode, List<TreeNode> traversedList){
         if (treeNode == null) return;
         System.out.print(treeNode.data+" ");
-        preOrderTraversal(treeNode.left);
-        preOrderTraversal(treeNode.right);
+        traversedList.add(treeNode);
+        preOrderTraversal(treeNode.left, traversedList);
+        preOrderTraversal(treeNode.right, traversedList);
     }
 
-    private static void postOrderTraversal(TreeNode treeNode){
+    public static void postOrderTraversal(TreeNode treeNode,  List<TreeNode> traversedList){
         if (treeNode == null){
             return;
         }
-        postOrderTraversal(treeNode.left);
-        postOrderTraversal(treeNode.right);
+        postOrderTraversal(treeNode.left, traversedList);
+        postOrderTraversal(treeNode.right, traversedList);
         System.out.print(treeNode.data+" ");
+        traversedList.add(treeNode);
     }
 
-    private static void inOrderTraversal(TreeNode treeNode){
+    public static void inOrderTraversal(TreeNode treeNode,  List<TreeNode> traversedList){
         if (treeNode == null){
             return;
         }
-        inOrderTraversal(treeNode.left);
+        inOrderTraversal(treeNode.left, traversedList);
         System.out.print(treeNode.data+" ");
-        inOrderTraversal(treeNode.right);
+        traversedList.add(treeNode);
+        inOrderTraversal(treeNode.right, traversedList);
     }
 }
